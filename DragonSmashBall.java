@@ -267,14 +267,14 @@ public class DragonSmashBall extends JFrame {
 
         // Danh sách nhân vật (ảnh tối và sáng)
         String[][] characterImages = {
-            {"/images/gokuAvatar2Off.png", "/images/gokuAvatar2.png"},
-            {"/images/picoloAvatarOff.png", "/images/picoloAvatar.png"},
-            {"/images/vegetaAvatarOff.png", "/images/vegetaAvatar.png"},
-            {"/images/kameSenninAvatarOff.png", "/images/kameSenninAvatar.png"},
-            {"/images/frieezaAvatarOff.png", "/images/frieezaAvatar.png"},
-            {"/images/buuAvatarOff.png", "/images/buuAvatar.png"},
-            {"/images/cellAvatarOff.png", "/images/cellAvatar.png"},
-            {"/images/gohanAvatarOff.png", "/images/gohanAvatar.png"}
+            {"/images/gokuAvatar2Off.png", "/images/gokuAvatar2.png", "/images/gokuCard.jpg"},
+            {"/images/picoloAvatarOff.png", "/images/picoloAvatar.png", "/images/picoloCard.jpg"},
+            {"/images/vegetaAvatarOff.png", "/images/vegetaAvatar.png", "/images/vegetaCard.jpg"},
+            {"/images/kameSenninAvatarOff.png", "/images/kameSenninAvatar.png", "/images/kameSenninCard.jpg"},
+            {"/images/frieezaAvatarOff.png", "/images/frieezaAvatar.png", "/images/freezaCard.jpg"},
+            {"/images/buuAvatarOff.png", "/images/buuAvatar.png", "/images/buuCard.jpg"},
+            {"/images/cellAvatarOff.png", "/images/cellAvatar.png", "/images/cellCard.jpg"},
+            {"/images/gohanAvatarOff.png", "/images/gohanAvatar.png", "/images/gohanCard.jpg"}
         };
 
         // Tạo các nút nhân vật
@@ -290,21 +290,6 @@ public class DragonSmashBall extends JFrame {
         lockButton.setBounds(850, 650, 200, 50);
         lockButton.addActionListener(e -> handleLockSelection());
         mainPanel.add(lockButton);
-//         JLabel  player1Label = new JLabel();
-//         ImageIcon player1Image = new ImageIcon(getClass().getResource("/images/gokuCard.jpg"));
-//         player1Label.setIcon(player1Image);
-//         player1Label.setBounds(15, 95, 400, 520); // Đặt ở góc trái
-//         mainPanel.add(player1Label);
-//         player1Label.revalidate();
-//         player1Label.repaint();
-//         
-//         JLabel  player2Label = new JLabel();
-//         ImageIcon player2Image = new ImageIcon(getClass().getResource("/images/gokuCard.jpg"));
-//         player2Label.setIcon(player2Image);
-//         player2Label.setBounds(1220, 95, 400, 520); // Đặt ở góc phải
-//         mainPanel.add(player2Label);
-//         player2Label.revalidate();
-//         player2Label.repaint();
         mainPanel.revalidate();
         mainPanel.repaint();
     }
@@ -314,6 +299,7 @@ public class DragonSmashBall extends JFrame {
         
         URL darkImageUrl = getClass().getResource(images[0]);
         URL lightImageUrl = getClass().getResource(images[1]);
+        URL card = getClass().getResource(images[2]);
         if (darkImageUrl != null && lightImageUrl != null) {
             button.setIcon(new ImageIcon(darkImageUrl));
             button.setRolloverIcon(new ImageIcon(lightImageUrl));
@@ -333,18 +319,18 @@ public class DragonSmashBall extends JFrame {
                 player1Selection --;
                 //updateCharacterPreview(1, lightImageUrl);
                 JLabel  player1Label = new JLabel();
-                ImageIcon player1Image = new ImageIcon(getClass().getResource("/images/gokuCard.jpg"));
+                ImageIcon player1Image = new ImageIcon(card);
                 player1Label.setIcon(player1Image);
                 player1Label.setBounds(15, 95, 400, 520); // Đặt ở góc trái
                 mainPanel.add(player1Label);
                 player1Label.revalidate();
                 player1Label.repaint();
-                currentPlayer ++;
+                //currentPlayer ++;
             } else if (currentPlayer == 2) {
                 player2Selection --;
                 //updateCharacterPreview(2, lightImageUrl);
                 JLabel  player2Label = new JLabel();
-                ImageIcon player2Image = new ImageIcon(getClass().getResource("/images/gokuCard.jpg"));
+                ImageIcon player2Image = new ImageIcon(card);
                 player2Label.setIcon(player2Image);
                 player2Label.setBounds(1220, 95, 400, 520); // Đặt ở góc phải
                 mainPanel.add(player2Label);
@@ -360,17 +346,6 @@ public class DragonSmashBall extends JFrame {
         
         return button;
     }
-    
-    // private void updateCharacterPreview(int player, URL imageUrl) {
-    //     if (imageUrl == null) return;
-
-    //     if (player == 1) {
-    //         gokuImage.setIcon(new ImageIcon(imageUrl));
-    //     } else {
-    //         gohanImage.setIcon(new ImageIcon(imageUrl));
-    //     }
-    // }
-
     
     private int currentPlayer = 1; // Người chơi hiện tại
     private int player1Selection = 0; // Nhân vật của người chơi 1

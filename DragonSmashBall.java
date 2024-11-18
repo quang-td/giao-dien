@@ -290,22 +290,21 @@ public class DragonSmashBall extends JFrame {
         lockButton.setBounds(850, 650, 200, 50);
         lockButton.addActionListener(e -> handleLockSelection());
         mainPanel.add(lockButton);
-        // JLabel  player1Label = new JLabel();
-        // ImageIcon player1Image = new ImageIcon(getClass().getResource("/images/gokuAvatar.png"));
-        // player1Label.setIcon(player1Image);
-        // JLabel  player2Label = new JLabel();
-        // ImageIcon player2Image = new ImageIcon(getClass().getResource("/images/gokuAvatar.png"));
-        // player2Label.setIcon(player2Image);
-        // player1Label.setBounds(100, 300, 200, 200); // Đặt ở góc trái
-        // player2Label.setBounds(1200, 300, 200, 200); // Đặt ở góc phải
-        // mainPanel.add(player1Label);
-
-        // mainPanel.add(player2Label);
-        
-        // player1Label.revalidate();
-        // player1Label.repaint();
-        // player2Label.revalidate();
-        // player2Label.repaint();
+//         JLabel  player1Label = new JLabel();
+//         ImageIcon player1Image = new ImageIcon(getClass().getResource("/images/gokuCard.jpg"));
+//         player1Label.setIcon(player1Image);
+//         player1Label.setBounds(15, 95, 400, 520); // Đặt ở góc trái
+//         mainPanel.add(player1Label);
+//         player1Label.revalidate();
+//         player1Label.repaint();
+//         
+//         JLabel  player2Label = new JLabel();
+//         ImageIcon player2Image = new ImageIcon(getClass().getResource("/images/gokuCard.jpg"));
+//         player2Label.setIcon(player2Image);
+//         player2Label.setBounds(1220, 95, 400, 520); // Đặt ở góc phải
+//         mainPanel.add(player2Label);
+//         player2Label.revalidate();
+//         player2Label.repaint();
         mainPanel.revalidate();
         mainPanel.repaint();
     }
@@ -333,11 +332,24 @@ public class DragonSmashBall extends JFrame {
             if (currentPlayer == 1) {
                 player1Selection --;
                 //updateCharacterPreview(1, lightImageUrl);
-                paintPeview1();
+                JLabel  player1Label = new JLabel();
+                ImageIcon player1Image = new ImageIcon(getClass().getResource("/images/gokuCard.jpg"));
+                player1Label.setIcon(player1Image);
+                player1Label.setBounds(15, 95, 400, 520); // Đặt ở góc trái
+                mainPanel.add(player1Label);
+                player1Label.revalidate();
+                player1Label.repaint();
+                currentPlayer ++;
             } else if (currentPlayer == 2) {
                 player2Selection --;
                 //updateCharacterPreview(2, lightImageUrl);
-                paintPeview2();
+                JLabel  player2Label = new JLabel();
+                ImageIcon player2Image = new ImageIcon(getClass().getResource("/images/gokuCard.jpg"));
+                player2Label.setIcon(player2Image);
+                player2Label.setBounds(1220, 95, 400, 520); // Đặt ở góc phải
+                mainPanel.add(player2Label);
+                player2Label.revalidate();
+                player2Label.repaint();
             }
 
             // Đổi ảnh sang trạng thái sáng
@@ -415,16 +427,16 @@ public class DragonSmashBall extends JFrame {
         // Bắt đầu game với map đã chọn
         System.out.println("Bắt đầu game với map: " + mapImage);
     }
-    public void paintPeview1(){
-        JLabel gokuPreview = new JLabel(new ImageIcon("src\\images\\gokuCard.jpg"));
-        gokuPreview.setBounds(15, 95, 300, 439);  // Phóng to Goku
-        mainPanel.add(gokuPreview);
-    }
-    public void paintPeview2(){
-        JLabel vegetaPreview = new JLabel(new ImageIcon("src\\images\\gokuCard.jpg"));
-        vegetaPreview.setBounds(1220, 95, 300, 439); // Phóng to Vegeta
-        mainPanel.add(vegetaPreview);
-    }
+//    public void paintPeview1(){
+//        JLabel gokuPreview = new JLabel(new ImageIcon("/images/gokuCard.jpg"));
+//        mainPanel.add(gokuPreview);
+//        gokuPreview.setBounds(15, 95, 300, 439);  // Phóng to Goku
+//    }
+//    public void paintPeview2(){
+//        JLabel vegetaPreview = new JLabel(new ImageIcon("/images/gokuCard.jpg"));
+//        mainPanel.add(vegetaPreview);
+//        vegetaPreview.setBounds(1220, 95, 300, 439); // Phóng to Vegeta
+//    }
 
 
 }

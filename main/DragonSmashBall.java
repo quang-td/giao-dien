@@ -17,14 +17,17 @@ public class DragonSmashBall extends JFrame {
     private int currentFps = 60; // Lưu giá trị FPS
     private boolean isSoundOn = true; // Âm thanh mặc định là bật
     private Clip menuMusicClip;
+    private int currentWidth = 1920;
+    private int currentHeight = 1080;
+    private double scaleX = 1, scaleY = 1;
 
     public DragonSmashBall() {
         setTitle("Dragon Smash Ball Z");
-        setSize(1920, 1080); // Tăng kích thước màn hình
+        setSize((int)(currentWidth * scaleX), (int)(currentHeight * scaleY )); // Tăng kích thước màn hình
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        setupBackground();
+        setupBackground("/images/menu/menuback.png");
         setupTitle();
         setupCharacterAnimations();
         setupButtons();
@@ -33,12 +36,12 @@ public class DragonSmashBall extends JFrame {
         setVisible(true);
     }
 
-    private void setupBackground() {
+    private void setupBackground(String backGround) {
         mainPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                URL imageUrl = getClass().getResource("/images/menu/menuback.png");
+                URL imageUrl = getClass().getResource(backGround);
                 if (imageUrl != null) {
                     g.drawImage(new ImageIcon(imageUrl).getImage(), 0, 0, getWidth(), getHeight(), this);
                 }
@@ -58,7 +61,7 @@ public class DragonSmashBall extends JFrame {
     }
 
     private void setupCharacterAnimations() {
-        gokuImage = createImageLabel("/images/menu/songokumenu.gif", 30, 120, 450, 580);
+        gokuImage = createImageLabel("/images/menu/songokumenu.gif", (int)(30*scaleX), 120, 450, 580);
         gohanImage = createImageLabel("/images/menu/gohanmenu.gif", 1200, 120, 300, 280);
 
         animationTimer = new Timer(1000 / currentFps, new ActionListener() {
@@ -148,7 +151,7 @@ public class DragonSmashBall extends JFrame {
 
     private void showSettingsScreen() {
         mainPanel.removeAll();
-        setupBackground();
+        setupBackground("/images/menu/menuback.png");
         setupTitle();
         setupCharacterAnimations();
         int yPosition = 280;
@@ -171,6 +174,7 @@ public class DragonSmashBall extends JFrame {
                     break;
                 case "1280x720":
                     setSize(1280, 720);
+                    
                     break;
                 case "800x600":
                     setSize(800, 600);
@@ -225,7 +229,7 @@ public class DragonSmashBall extends JFrame {
 
     private void showMainScreen() {
         mainPanel.removeAll();
-        setupBackground();
+        setupBackground("/images/menu/menuback.png");
         setupTitle();
         setupCharacterAnimations();
         setupButtons();
@@ -325,7 +329,7 @@ public class DragonSmashBall extends JFrame {
                 mainPanel.add(player1Label);
                 player1Label.revalidate();
                 player1Label.repaint();
-                //currentPlayer ++;
+                currentPlayer ++;
             } else if (currentPlayer == 2) {
                 player2Selection --;
                 //updateCharacterPreview(2, lightImageUrl);
@@ -336,6 +340,7 @@ public class DragonSmashBall extends JFrame {
                 mainPanel.add(player2Label);
                 player2Label.revalidate();
                 player2Label.repaint();
+                currentPlayer ++;
             }
 
             // Đổi ảnh sang trạng thái sáng
@@ -353,9 +358,7 @@ public class DragonSmashBall extends JFrame {
     
     
     private void handleLockSelection() {
-        if (currentPlayer == 1 && player1Selection != -1) {
-            currentPlayer = 2; // Chuyển sang người chơi 2
-        } else if (currentPlayer == 2 && player2Selection != -1) {
+        if (currentPlayer == 3) {
             showMapSelectionScreen(); // Chuyển sang trang chọn bản đồ
         }
     }
@@ -364,7 +367,7 @@ public class DragonSmashBall extends JFrame {
     
     private void showMapSelectionScreen() {
         mainPanel.removeAll();
-        setupBackground();
+        setupBackground("/images/menu/menuback.png");
 
         JLabel titleLabel = new JLabel("Chọn bản đồ");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
@@ -374,12 +377,12 @@ public class DragonSmashBall extends JFrame {
 
         // Hiển thị các bản đồ
         JPanel mapGrid = new JPanel();
-        mapGrid.setBounds(550, 200, 400, 400);
-        mapGrid.setLayout(new GridLayout(1, 3, 10, 10));
+        mapGrid.setBounds(100, 75, 1300, 700);
+        mapGrid.setLayout(new GridLayout(2,2,75,75));
         mapGrid.setOpaque(false);
 
         String[] mapImages = {
-            "/images/map/valley_map.png", "/images/map/valley_map.png", "/images/map/valley_map.png"
+            "/images/map/map0.gif", "/images/map/map1.gif", "/images/map/map2.gif","/images/map/map3.gif"
         };
 
         for (String mapImage : mapImages) {
@@ -401,17 +404,12 @@ public class DragonSmashBall extends JFrame {
     private void startGameWithMap(String mapImage) {
         // Bắt đầu game với map đã chọn
         System.out.println("Bắt đầu game với map: " + mapImage);
+            mainPanel.removeAll();
+            setupBackground(mapImage);
+            JButton jButtonNew = new JButton("San sang?");
+            mainPanel.revalidate();
+            mainPanel.repaint();
+        
     }
-//    public void paintPeview1(){
-//        JLabel gokuPreview = new JLabel(new ImageIcon("/images/gokuCard.jpg"));
-//        mainPanel.add(gokuPreview);
-//        gokuPreview.setBounds(15, 95, 300, 439);  // Phóng to Goku
-//    }
-//    public void paintPeview2(){
-//        JLabel vegetaPreview = new JLabel(new ImageIcon("/images/gokuCard.jpg"));
-//        mainPanel.add(vegetaPreview);
-//        vegetaPreview.setBounds(1220, 95, 300, 439); // Phóng to Vegeta
-//    }
-
 
 }
